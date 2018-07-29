@@ -1,0 +1,10 @@
+nav {
+  background-color: #E51A00;
+  margin-bottom: 15vw;
+}
+
+@media (min-width: 800px){
+  nav {
+    margin-bottom: 5vw;
+  }
+}

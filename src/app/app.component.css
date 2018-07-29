@@ -1,0 +1,13 @@
+html {
+	background-image: url('assets/img/pokeballs.png');
+	background-blend-mode: lighten;
+}
+
+h1 {
+	color: red;
+}
+
+.titulo {
+	text-align:center;
+
+}

@@ -1,0 +1,136 @@
+<div class="row center">
+	<div class="col l4 m4 s12 offset-l4 offset-m4">
+		<button class="waves-effect waves-light btn" (click)="abreModal()">COMEÇAR</button>
+		<div class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalActions">
+			<div class="modal-content center">
+				<h4>Cadastro de treinadores</h4>
+				<img src="assets/img/poke_ball.gif" width="150px">
+				<div class="row">
+					<form #cadastro="ngForm" (ngSubmit)="onSubmit(cadastro)">
+						<div class="row">
+							<div class="input-field col l5 m5 s12 offset-l1 offset-m1">
+								<input id="nome" type="text" name="nome" ngModel required #nome="ngModel">
+								<label for="nome">Nome</label>
+							</div>
+							<div class="input-field col l5 m5 s12">
+								<input id="idade" type="text" name="idade" ngModel required #idade="ngModel" (blur)="checkIdade(idade)">
+								<label for="idade">Idade</label>
+							</div>
+							<div id="alert" class="col l5 m5 s12 offset-l1 offset-m1" *ngIf="(nome.invalid && nome.touched) || (idade.invalid && idade.touched)">
+								<p><span>Campo(s) obrigatório(s).</span></p>
+							</div>
+							<div id="alert" class="col l5 m5 s12 offset-l6 offset-m6" *ngIf="idadeError && idade.touched && idade.valid">
+								<p><span>Não é permitido menores de 10 anos.</span></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col l5 m5 s12 offset-l1 offset-m1">
+								<input id="identificacao" type="text" name="identificacao" ngModel required #identificacao="ngModel" (blur)="checkIdentificacao(identificacao)">
+								<label for="identificacao">Número de identificação</label>
+							</div>
+							<div class="input-field col l5 m5 s12">
+								<input id="email" type="text" name="email" ngModel email required #email="ngModel" (blur)="checkEmail(email)">
+								<label for="email">E-mail</label>
+							</div>
+							<div id="alert" class="col l5 m5 s12 offset-l1 offset-m1" *ngIf="(identificacao.invalid && identificacao.touched) || (email.invalid && email.touched && !identificacaoError && emailEmpty)">
+								<p><span>Campo(s) obrigatório(s).</span></p>
+							</div>
+							<div id="alert" class="col l5 m5 s12 offset-l1 offset-m1" *ngIf="identificacaoError && identificacao.touched && identificacao.valid">
+								<p><span>O número de identificação deve ter 8 números.</span></p>
+							</div>
+							<div id="alert" class="col l5 m5 s12 offset-l6 offset-m6" *ngIf="email.invalid && email.touched && !emailEmpty">
+								<p><span>E-mail incorreto.</span></p>
+							</div>
+						</div>
+						<div class="row img">
+							<div class="input-field col l5 m6 s12 offset-l1 offset-m1">
+								<input id="pokemon" type="text" name="pokemon" ngModel required #pokemon="ngModel" (blur)="getPokemon(pokemon)">
+								<label for="pokemon">Escolha seu pokémon inicial</label>
+							</div>
+							<div class="input-field col l5 m5 s12 pk" *ngIf="pokemons && pokemon.valid">
+								<img [src]="pokemons.sprites.front_default" width="100px">
+							</div>
+							<div id="alert" class="col l5 m4 s12" *ngIf="pokemon.invalid && pokemon.touched">
+								<p><span>É perigoso lá fora. Escolha um pokémon!</span></p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col l5 m5 s12 offset-l1 offset-m1">
+								<p>Escolha sua região inicial</p><br>
+								<p>
+										<input id="kantoInicial" name="regiaoInicial" type="radio" value="1" ngModel required #regiaoInicial="ngModel"/>
+  									<label for="kantoInicial">Kanto</label>
+					    	</p>
+						    <p>
+						      	<input id="johtoInicial" name="regiaoInicial" type="radio" value="2" ngModel />
+    								<label for="johtoInicial">Johto</label>
+						    </p>
+						    <p>
+						      	<input id="hoennInicial" name="regiaoInicial" type="radio" value="3" ngModel />
+    								<label for="hoennInicial">Hoenn</label>
+						    </p>
+						    <p>
+						      	<input id="sinnohInicial" name="regiaoInicial" type="radio" value="4" ngModel />
+    								<label for="sinnohInicial">Sinnoh</label>
+						   	</p>
+						   	<p>
+						      	<input id="unovaInicial" name="regiaoInicial" type="radio" value="5" ngModel />
+    								<label for="unovaInicial">Unova</label>
+						    </p>
+						    <p>
+						      	<input id="kalosInicial" name="regiaoInicial" type="radio" value="6" ngModel />
+    								<label for="kalosInicial">Kalos</label>
+						    </p>
+								<p>
+						      	<input id="alolaInicial" name="regiaoInicial" type="radio" value="7" ngModel />
+    								<label for="alolaInicial">Alola</label>
+						    </p>
+							</div>
+							<div class="col l5 m5 s12">
+								<p>Quais regiões pretende se aventurar futuramente?</p><br>
+								<p>
+											<input id="kanto" name="regiaoFuturoKanto" value="kanto" type="checkbox" ngModel [disabled]="regiaoInicial.value == '1'"/>
+      								<label for="kanto">Kanto</label>
+							    </p>
+							    <p>
+							      	<input id="johto" name="regiaoFuturoJohto" value="johto" type="checkbox" ngModel [disabled]="regiaoInicial.value == '2'"/>
+      								<label for="johto">Johto</label>
+							    </p>
+							    <p>
+							      	<input id="hoenn" name="regiaoFuturoHoenn" value="hoenn" type="checkbox" ngModel [disabled]="regiaoInicial.value == '3'"/>
+      								<label for="hoenn">Hoenn</label>
+							    </p>
+							    <p>
+							      	<input id="sinnoh" name="regiaoFuturoSinnoh" value="sinnoh" type="checkbox" ngModel [disabled]="regiaoInicial.value == '4'"/>
+      								<label for="sinnoh">Sinnoh</label>
+							   	</p>
+							   	<p>
+							      	<input id="unova" name="regiaoFuturoUnova" value="unova" type="checkbox" ngModel [disabled]="regiaoInicial.value == '5'"/>
+      								<label for="unova">Unova</label>
+							    </p>
+							    <p>
+							      	<input id="kalos" name="regiaoFuturoKalos" value="kalos" type="checkbox" ngModel [disabled]="regiaoInicial.value == '6'"/>
+      								<label for="kalos">Kalos</label>
+							    </p>
+									<p>
+							      	<input id="alola" name="regiaoFuturoAlola" value="alola" type="checkbox" ngModel [disabled]="regiaoInicial.value == '7'"/>
+      								<label for="alola">Alola</label>
+							    </p>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<div class="row">
+								<div class="col l4 m4 s6 offset-l2 offset-m2 left-align">
+									<button class="waves-effect waves-light btn-flat" (click)="fechaModal()">Fechar</button>
+								</div>
+								<div class="col l4 m4 s6 left-align">
+									<button type="submit" [disabled]="nome.invalid || idadeError || identificacaoError || email.invalid || regiaoInicial.invalid" class="modal-action modla-close waves-effect waves-light btn-flat">Enviar</button>
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

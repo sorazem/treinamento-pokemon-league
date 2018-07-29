@@ -1,0 +1,57 @@
+p {
+  font-family: 'Muli', sans-serif;
+  color: #0094A2;
+}
+
+h4 {
+  color: #005A75;
+  font-family: 'Bungee', cursive;
+}
+
+/* label color */
+.input-field label {
+  color: #0094A2;
+  font-family: 'Muli', sans-serif;
+}
+
+/* label focus color */
+.input-field input[type=text]:focus + label {
+  color: #0094A2;
+  font-family: 'Muli', sans-serif;
+}
+
+/* label underline focus color */
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #FAFAFA;
+  box-shadow: 0 1px 0 0 #0094A2;
+}
+
+.img {
+  height: 120px;
+  margin: 0;
+}
+
+.pk {
+  margin: 0;
+}
+
+.btn, .btn-flat {
+  background-color: #F57000;
+}
+
+.btn-flat {
+  color: white;
+}
+
+.modal-footer {
+  margin-top: 10%;
+}
+
+.modal-footer > .row > .col {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+span {
+  color: red;
+}

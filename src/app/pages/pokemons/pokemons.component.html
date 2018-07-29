@@ -1,0 +1,17 @@
+<html>
+	<head>
+
+	</head>
+	
+	<body>
+		<a class="waves-effect waves-light btn" (click)="getPokemon()">Clique em mim</a>
+		
+		<ul class="collection" *ngFor="let pokemon of pokemons">
+			<li> {{pokemon.name}} </li>
+			<img src="{{pokemon.sprites.front_shiny}}">
+		</ul>
+	</body>
+
+</html>
+
+
